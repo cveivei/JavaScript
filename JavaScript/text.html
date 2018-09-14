@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+		*{
+		padding: 0;
+		margin: 0;
+		}
+		#colorTable{
+			border-collapse: collapse;
+		}
+			td{
+				border:1px solid lightgray;
+				height: 30px;
+				width: 30px;
+				
+				
+			}
+		</style>
+	</head>
+	<body>
+		<table id="colorTable">
+			
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+		
+			
+		</table>
+		
+<button onclick="int=window.clearInterval(int)">
+stop</button>
+	</body>
+	<script type="text/javascript">
+		var oColorTable = document.getElementById("colorTable");
+		var oTr=oColorTable.getElementsByTagName("tr");
+		var oTd = oColorTable.getElementsByTagName("td");
+		var int=self.setInterval("clock()",60);
+		
+   
+  function clock(){ 
+  	for (var i = 0; i < oTd.length; i++) {
+			var str=parseInt(Math.random()*361);
+			
+			oTd[i].style.background="hsla("+str+",50%,50%,.5)";
+		}
+  }
+
+	
+	</script>
+</html>
