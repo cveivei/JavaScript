@@ -1,97 +1,295 @@
 <!DOCTYPE html>
+
 <html>
+
 	<head>
+
 		<meta charset="utf-8" />
+
 		<title></title>
+
 		<style type="text/css">
+
 		#time{
+
 			width: 300px;
+
 			height: 300px;
+
 			background: url(https://bestace.github.io/fed/ppt/demos/jsBase/img/clock.jpg);
+
 			background-size: 100%;
+
 			position: relative;
+
 		}
+
 			#sec{height: 100px;
+
 			width: 2px;
+
 			background: red;
+
 			position: absolute;
+
 			bottom: 150px;
+
 			left: 150px;
+
 			transform-origin: 50% bottom;
+
 				
+
 			}
+
 			#hour{
+
 				height: 60px;
+
 			width: 4px;
+
 			background: black;
+
 			position: absolute;
+
 			bottom: 150px;
+
 			left: 150px;
+
 			transform-origin: 50% bottom;
+
 			}
+
 			#min{
+
 				height: 100px;
+
 			width: 3px;
+
 			background: black;
+
 			position: absolute;
+
 			bottom: 150px;
+
 			left: 150px;
+			
+
 			transform-origin: 50% bottom;
+
 			}
-		</style>
-	</head>
-	<body>
-	<div id="time" >
-		<div id="hour"></div>
-		<div id="min"></div>
-		<div id="sec"></div>
-		
-	</div>
+#timepaint{
+	position: relative;
+}
+canvas{
+	background:transparent;
+	position: absolute;
 	
-		<canvas id="myCanvas" width="400px" height="300px" style="border: 1px solid red;"></canvas>
+	
+
+}
+#timer{
+	position: absolute;
+	bottom:-310px;
+	left: 272px;
+}
+		</style>
+
+	</head>
+
+	<body>
+
+	<div id="time" >
+
+		<div id="hour"></div>
+
+		<div id="min"></div>
+
+		<div id="sec"></div>
+
+		
+
+	</div>
+
+	
+<div id="timepaint">
+		<canvas id="myCanvas" width="700px" height="700px" ></canvas>
+		<canvas id="myCanvas1" width="700px" height="700px" ></canvas>
+		<canvas id="myCanvas2" width="700px" height="700px" ></canvas>
+		<div id="timer"></div>
+		
+</div>
 	</body>
+
 	<script type="text/javascript">
+
 		var now;
+
 	var osec=document.getElementById('sec');
+
 	var ohour=document.getElementById('hour');
+
 	var omin=document.getElementById('min');
+
 		function timer(){
+
 			now=new Date();
+
 			var year=now.getFullYear();
+
 			var mou=now.getMonth()+1;
+
 			var data=now.getDate();
+
 			var ho=now.getHours();
+
 			var min=now.getMinutes();
+
 			var sec=now.getSeconds();
+
            osec.style.transform="rotate("+sec*6+"deg)";
+
            ohour.style.transform="rotate("+(ho*30+0.5*min)+"deg)";
+
            omin.style.transform="rotate("+min*6+"deg)";
+
            var canvas = document.getElementById("myCanvas");
+            var canvas1 = document.getElementById("myCanvas1");
+             var canvas2 = document.getElementById("myCanvas2");
+
  //简单地检测当前浏览器是否支持Canvas对象，以免在一些不支持html5的浏览器中提示语法错误
+
 if(canvas.getContext){  
+
     //获取对应的CanvasRenderingContext2D对象(画笔)
+
     var ctx = canvas.getContext("2d");  
 
+
+
     //开始一个新的绘制路径
+
     ctx.beginPath();
+
     //设置弧线的颜色为蓝色
+
      ctx.strokeStyle = "blue";
+    ctx.lineWidth = 20;
+   
+
      var circle = {
-        x : 100,    //圆心的x轴坐标值
-         y : 100,    //圆心的y轴坐标值
-        r : 50      //圆的半径
+
+  x : 299,    //圆心的x轴坐标值
+
+         y : 299,    //圆心的y轴坐标值
+
+            //圆的半径
+
    };
+
      //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+
     ctx.arc(circle.x, circle.y,50, 1.5*Math.PI, ((1.5+(2/60*sec)%2))*Math.PI,false);  
-    console.log(((1.5+(2/60*sec)%2))*Math.PI);
+
+    
     //按照指定的路径绘制弧线
+ ctx.fillStyle = '#000';   // 文字填充颜色
+      
+     ctx.font = "15px 楷体";
+    var x1=circle.x+50*Math.cos(((2/60*sec)%2-0.5)*Math.PI);
+    var y1=circle.y+50*Math.sin(((2/60*sec)%2-0.5)*Math.PI);
+    console.log(x1);
+    console.log(y1);
+  
     ctx.stroke();
+
     if((2/60*sec)%2==0) ctx.clearRect(0,0,canvas.width,canvas.height); 
+
  }
+if(canvas1.getContext){  
+
+    //获取对应的CanvasRenderingContext2D对象(画笔)
+
+    var ctx1 = canvas1.getContext("2d");  
+
+
+
+    //开始一个新的绘制路径
+
+    ctx1.beginPath();
+
+    //设置弧线的颜色为蓝色
+
+     ctx1.strokeStyle = "red";
+      ctx1.lineWidth = 20;
+
+     var circle = {
+
+       x : 300,    //圆心的x轴坐标值
+
+         y : 300,    //圆心的y轴坐标值
+     //圆的半径
+
+   };
+
+     //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+
+    ctx1.arc(circle.x, circle.y,75, 1.5*Math.PI, ((1.5+(2/60*min)%2))*Math.PI,false);  
+
+   
+    //按照指定的路径绘制弧线
+
+    ctx1.stroke();
+
+    if((2/60*min)%2==0) ctx1.clearRect(0,0,canvas1.width,canvas1.height); 
+
+ }
+if(canvas2.getContext){  
+
+    //获取对应的CanvasRenderingContext2D对象(画笔)
+
+    var ctx2 = canvas2.getContext("2d");  
+
+
+
+    //开始一个新的绘制路径
+
+    ctx2.beginPath();
+
+    //设置弧线的颜色为蓝色
+
+     ctx2.strokeStyle = "yellow";
+      ctx2.lineWidth = 20;
+
+     var circle = {
+ x : 300,    //圆心的x轴坐标值
+ y : 300,    //圆心的y轴坐标值
+     //圆的半径
+
+   };
+
+     //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+
+    ctx2.arc(circle.x, circle.y,100, 1.5*Math.PI, ((1.5+(2/12*ho+(2/720*min))%2))*Math.PI,false);  
+
+    
+
+    //按照指定的路径绘制弧线
+
+    ctx2.stroke();
+
+    if((2/12*ho)%2==0) ctx2.clearRect(0,0,canvas2.width,canvas2.height); 
+
+ }
+document.getElementById('timer').innerHTML=ho+":"+min+":"+sec;
+
 		    t=setTimeout(timer,1000);
+
 		}
+
 		timer();
-		
-		
+
+	
 	</script>
+
 </html>
