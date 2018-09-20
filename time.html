@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+		#time{
+			width: 300px;
+			height: 300px;
+			background: url(https://bestace.github.io/fed/ppt/demos/jsBase/img/clock.jpg);
+			background-size: 100%;
+			position: relative;
+		}
+			#sec{height: 100px;
+			width: 2px;
+			background: red;
+			position: absolute;
+			bottom: 150px;
+			left: 150px;
+			transform-origin: 50% bottom;
+				
+			}
+			#hour{
+				height: 60px;
+			width: 4px;
+			background: black;
+			position: absolute;
+			bottom: 150px;
+			left: 150px;
+			transform-origin: 50% bottom;
+			}
+			#min{
+				height: 100px;
+			width: 3px;
+			background: black;
+			position: absolute;
+			bottom: 150px;
+			left: 150px;
+			transform-origin: 50% bottom;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="time" >
+		<div id="hour"></div>
+		<div id="min"></div>
+		<div id="sec"></div>
+		
+	</div>
+	
+		
+	</body>
+	<script type="text/javascript">
+		var now;
+	var osec=document.getElementById('sec');
+	var ohour=document.getElementById('hour');
+	var omin=document.getElementById('min');
+		function timer(){
+			now=new Date();
+			var year=now.getFullYear();
+			var mou=now.getMonth()+1;
+			var data=now.getDate();
+			var ho=now.getHours();
+			var min=now.getMinutes();
+			var sec=now.getSeconds();
+           osec.style.transform="rotate("+sec*6+"deg)";
+           ohour.style.transform="rotate("+(ho*30+0.5*min)+"deg)";
+             omin.style.transform="rotate("+min*6+"deg)";
+		    t=setTimeout(timer,1000);
+		}
+		timer();
+		
+		
+	</script>
+</html>
