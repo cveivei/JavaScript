@@ -48,7 +48,7 @@
 		
 	</div>
 	
-		
+		<canvas id="myCanvas" width="400px" height="300px" style="border: 1px solid red;"></canvas>
 	</body>
 	<script type="text/javascript">
 		var now;
@@ -65,7 +65,29 @@
 			var sec=now.getSeconds();
            osec.style.transform="rotate("+sec*6+"deg)";
            ohour.style.transform="rotate("+(ho*30+0.5*min)+"deg)";
-             omin.style.transform="rotate("+min*6+"deg)";
+           omin.style.transform="rotate("+min*6+"deg)";
+           var canvas = document.getElementById("myCanvas");
+ //简单地检测当前浏览器是否支持Canvas对象，以免在一些不支持html5的浏览器中提示语法错误
+if(canvas.getContext){  
+    //获取对应的CanvasRenderingContext2D对象(画笔)
+    var ctx = canvas.getContext("2d");  
+
+    //开始一个新的绘制路径
+    ctx.beginPath();
+    //设置弧线的颜色为蓝色
+     ctx.strokeStyle = "blue";
+     var circle = {
+        x : 100,    //圆心的x轴坐标值
+         y : 100,    //圆心的y轴坐标值
+        r : 50      //圆的半径
+   };
+     //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+    ctx.arc(circle.x, circle.y,50, 1.5*Math.PI, ((1.5+(2/60*sec)%2))*Math.PI,false);  
+    console.log(((1.5+(2/60*sec)%2))*Math.PI);
+    //按照指定的路径绘制弧线
+    ctx.stroke();
+    if((2/60*sec)%2==0) ctx.clearRect(0,0,canvas.width,canvas.height); 
+ }
 		    t=setTimeout(timer,1000);
 		}
 		timer();
