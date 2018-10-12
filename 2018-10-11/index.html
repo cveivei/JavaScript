@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			body {
+				background-color: white;
+			}
+			.snow {
+				background:black;
+				border-radius: 100%;
+				position: fixed;
+			}
+		#a{
+			height: 5px;
+			width: 500px;
+			position: absolute;
+			left: 100px;
+			bottom: 125px;
+			background: red;
+		}
+		#b{
+			height: 75px;
+			width: 5px;
+			position: absolute;
+			top: 200px;
+			left: 280px;
+			background: blue;
+		}
+			#c{
+			height: 75px;
+			width: 5px;
+			position: absolute;
+			top: 195px;
+			left: 370px;
+			background: blue;
+		}
+				
+		</style>
+	</head>
+
+	<body>
+		<div id="a"></div>
+		<div id="b"></div>
+			<div id="c"></div>
+		<img src="img/xuxu.jpg" />
+		<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一起来敲代码吧！！！</h1>
+		<script type="text/javascript">
+			var snow;
+			
+
+			function ran(min, max, isint) {
+				var a = min + Math.random() * (max - min);
+				return isint ? parseInt(a) : a;
+			}
+			var win = window.innerWidth;
+			var hig = window.innerHeight;
+//			var o;
+			class Snow {
+				constructor() {
+					this.size = ran(5, 18, false);
+					this.alpha = ran(0.3, 1, false);
+					this.blur = ran(0, 2, false);
+					this.x = ran(200, 450, true);
+					this.y = ran(50, 150, true);
+					this.z = ran(0, 20, true);
+					this.speed = ran(2, 5, false);
+					this.wind = ran(-3, 10, false);
+					this.o = null;
+				}
+				draw() {
+					this.o = document.createElement("div");
+					this.o.className = "snow";
+					document.body.appendChild(this.o);
+					this.o.style.width = this.size + "px";
+					this.o.style.height = this.size + "px";
+					this.o.style.filter = `blur(${this.blur}px)`;
+					this.o.style.zIndex = this.z;
+					this.o.style.opacity = this.alpha;
+					
+//					console.log(this.o);
+				}
+				drop() {
+					//console.log(this,this.o);
+					if(this.x>=325)
+					this.x += this.wind;
+					else this.x -= this.wind;
+					this.y -= this.speed;
+					if (this.y > hig) 	this.y = ran(50, 150, true);
+					this.o.style.left = this.x + "px";
+					this.o.style.top = this.y + "px";
+				}
+			}
+			class weather {
+				constructor(snowNom, snowWind) {
+					this.snowNom = snowNom;
+					this.snowWind = snowWind;
+					this.snowArr = [];
+				}
+				create() {
+					var that = this;
+//					console.log(that.snowNom);
+					for (var i = 0; i < that.snowNom; i++) {
+						snow = new Snow();
+						snow.draw();
+						that.snowArr.push(snow);
+					}
+				}
+				runSnow() {
+					var that = this;
+//					console.log(that.snowNom);
+
+					function run() {
+//						console.log(that);
+						for (var i = 0; i < that.snowNom; i++) {
+							that.snowArr[i].drop();
+							
+						}
+						window.requestAnimationFrame(run);
+					}
+					run();
+				}
+			}
+			var m = new weather(1000, 15);
+			m.create();
+			m.runSnow();
+		</script>
+	</body>
+
+</html>
