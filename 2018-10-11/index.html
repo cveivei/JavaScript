@@ -6,7 +6,7 @@
 		<title></title>
 		<style>
 			body {
-				background: blue;
+				background:black;
 			}
 			.snow {
 				background:white;
@@ -23,7 +23,6 @@
 		<script type="text/javascript">
 			var snow;
 			
-
 			function ran(min, max, isint) {
 				var a = min + Math.random() * (max - min);
 				return isint ? parseInt(a) : a;
@@ -36,7 +35,7 @@
 					this.size = ran(5, 18, false);
 					this.alpha = ran(0.3, 1, false);
 					this.blur = ran(0, 2, false);
-					this.x = ran(-5, 5, true);
+					this.x = ran(0,win, true);
 					this.y = ran(-hig/2,0, true);
 					this.z = ran(0, 20, true);
 					this.speed = ran(2, 5, false);
@@ -57,10 +56,8 @@
 				}
 				drop() {
 					//console.log(this,this.o);
-					if(this.x>=325)
 					this.x += this.wind;
-					else this.x -= this.wind;
-					this.y -= this.speed;
+					this.y+= this.speed;
 					if (this.y > hig)  this.y = ran(-hig/2,0, true);	
 					this.o.style.left = this.x + "px";
 					this.o.style.top = this.y + "px";
@@ -84,7 +81,6 @@
 				runSnow() {
 					var that = this;
 //					console.log(that.snowNom);
-
 					function run() {
 //						console.log(that);
 						for (var i = 0; i < that.snowNom; i++) {
